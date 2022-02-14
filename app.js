@@ -6,17 +6,17 @@ const locationCLI = process.argv[2];
 if (!locationCLI) {
     console.log('Please provide an address.');
 } else {
-    geocode(locationCLI, (error, geoData) => {
+    geocode(locationCLI, (error, {latitude, longitude, location} = {}) => {
         if (error) {
             return console.log(error);
         }
     
-        forecast(geoData.latitude, geoData.longitude, (error, forecastData) => {
+        forecast(latitude, longitude, (error, forecastData) => {
             if (error) {
                 return console.log(error);
             }
     
-            console.log(geoData, forecastData);
+            console.log(location, forecastData);
         })
     });
 }
